@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Featured Post Section -->
+{% for post in featured_post %}
+{% if forloop.first %}
+<div class="container position-relative py-5">
+  <div class="row align-items-center">
+    <div class="col-12 col-lg-8">
+      <div class="badge bg-warning text-dark mb-3 px-3 py-2 shadow-sm">
+        <i class="fas fa-star me-1"></i> Featured Post
+      </div>
+      <h1 class="display-4 fw-bold mb-3 text-truncate" style="font-family: 'Playfair Display', serif">
+        {{ post.title }}
+      </h1>
+      <p class="lead mb-4 text-muted text-truncate">
+        {{ post.short_describtion|truncatechars:25 }}
+      </p>
+      <a href="{% url 'blogs' post.slug %}" class="btn btn-warning btn-lg text-dark fw-bold">
+        <i class="fas fa-book-reader me-2"></i> Continue Reading
+      </a>
+    </div>
+    <div class="col-lg-4 d-none d-lg-block text-center">
+      <i class="fas fa-feather-alt text-warning" style="font-size: 12rem; opacity: 0.2"></i>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endfor %}
+
+<!-- Category Posts -->
+<div class="container py-5">
+  <h2 class="mb-4" style="font-family: 'Playfair Display', serif">
+    <i class="fas fa-th-large text-warning me-2"></i> Category {{ catagory }}
+  </h2>
+  <div class="row gy-4">
+    {% if posts %}
+      {% for post in posts %}
+      <div class="col-12 col-md-6">
+        <div class="card border-0 shadow-sm h-100 hover-shadow">
+          <div class="card-body p-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <h4 class="card-title fw-bold text-truncate">
+                <a href="{% url 'blogs' post.slug %}" class="text-dark text-decoration-none">
+                  {{ post.title }}
+                </a>
+              </h4>
+              <span class="badge bg-success">Popular</span>
+            </div>
+            <div class="d-flex align-items-center mb-3 text-muted small flex-wrap">
+              <span class="me-3 mb-2">
+                <i class="far fa-calendar-alt me-1 text-warning"></i> {{ post.created_at|timesince }} ago
+              </span>
+              <span class="mb-2">
+                <i class="fas fa-user me-1 text-warning"></i> {{ post.author }}
+              </span>
+            </div>
+            <p class="card-text text-truncate">
+              {{ post.short_describtion|truncatechars:25 }}
+            </p>
+            <div class="d-flex justify-content-between align-items-center mt-4">
+              <a href="{% url 'blogs' post.slug %}" class="text-primary fw-bold">
+                Read More <i class="fas fa-arrow-right ms-1"></i>
+              </a>
+              <span class="text-muted">
+                <i class="far fa-heart me-1 text-danger"></i> 89
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <h5 class="ms-5 text-warning">No Post Found</h5>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}

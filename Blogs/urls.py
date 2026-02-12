@@ -1,0 +1,12 @@
+
+from django.urls import path,include
+from django.conf.urls.static import static
+from django.conf import settings
+from . import views
+urlpatterns = [
+    path('<int:catagory_id>/',views.posts_by_catagory,name='posts_by_catagory'),
+    
+
+]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

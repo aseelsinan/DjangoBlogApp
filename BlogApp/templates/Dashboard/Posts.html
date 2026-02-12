@@ -1,0 +1,62 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid" style="max-width: 1200px;margin: auto;">
+  <div class="row">
+    <!-- Sidebar -->
+    {%include 'dashboard/sidebar.html'%}
+
+   <div class="col-12 col-md-9">
+      <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center flex-wrap">
+          <h5 class="mb-0">All Posts</h5>
+          <a href="{% url 'add_post' %}" class="btn btn-sm btn-light text-primary fw-bold mt-2 mt-md-0">
+            <i class="fas fa-plus me-1"></i> Add Post
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-sm align-middle">
+
+              <thead class="table-light">
+                <tr>
+                  <th >#</th>
+                  <th >Title </th>
+                  <th >Catagory </th>
+                  <th >Author </th>
+                  <th >Featured</th>
+                  <th >Status</th>
+                  <th >Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {%for post in posts%}
+                <tr>
+                  <td >{{forloop.counter}}</td>
+                  <td >{{post.title}} </td>
+                  <td >{{post.catagory}} </td>
+                  <td >{{post.author}} </td>
+                  <td >{%if post.is_featured%}<i class="fas fa-check text-success mx-2"></i> {%else%} <i class="fas fa-times text-danger mx-2 "></i> {%endif%} </td>
+                  <td >{{post.status}} </td>
+                 
+                  <td>
+                    <a href="{%url 'edit_post' post.id%}" class="btn btn-sm btn-outline-success me-2 my-1">
+                      <i class="fas fa-edit"></i> Edit
+                    </a>
+                    <a href ="{%url 'delete_post' post.id%}"class="btn btn-sm btn-outline-danger">
+                      <i class="fas fa-trash"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+               {% endfor %}
+                <!-- مثال فقط، الباك اند سيضيف البقية -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+  </div>
+</div>
+{% endblock %}

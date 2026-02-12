@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container-fluid" style="max-width: 1200px;margin: auto;">
+  <div class="row">
+    <!-- Load the Sidebar -->
+     
+    {%include 'dashboard/sidebar.html'%}
+
+    <!-- Main Content -->
+    <div class="col-12 col-md-9">
+      <div class="row g-3">
+        <!-- Categories Card -->
+        <div class="col-12 col-md-6">
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning text-dark fw-bold text-center">
+              <i class="fas fa-folder-open me-2"></i> All Categories
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title fw-bold">{{catagories_count}}</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Posts Card -->
+        <div class="col-12 col-md-6">
+          <div class="card shadow-sm border-0">
+            <div class="card-header bg-warning text-dark fw-bold text-center">
+              <i class="fas fa-file-alt me-2"></i> All Posts
+            </div>
+            <div class="card-body text-center">
+              <h5 class="card-title fw-bold">{{bosts_count}}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

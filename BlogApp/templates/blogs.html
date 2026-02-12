@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <link rel="stylesheet" href="{%static 'css/blog.css'%}">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            
+            <!-- Featured Image -->
+            {% if single_post.featured_image %}
+            <div class="featured-image mb-4">
+                <img src="{{ single_post.featured_image.url }}" alt="{{ single_post.title }}" class="img-fluid rounded shadow">
+            </div>
+            {% endif %}
+
+            <!-- Post Title -->
+            <h1 class="mb-3">{{ single_post.title }}</h1>
+            
+            <!-- Post Meta Info -->
+            <div class="post-meta mb-4 ">
+               <a href="{%url 'posts_by_catagory'% catagory.id}" class="text-muted"> <span class="mr-3">
+                    <i class="fas fa-folder mr-1"></i>
+                    {{ single_post.catagory }}
+                </span></a>
+                <span class="mr-3">
+                    <i class="fas fa-user mr-1"></i>
+                    {{ single_post.author }}
+                </span>
+                <span>
+                    <i class="far fa-calendar mr-1"></i>
+                    {{ single_post.created_at|date:"F d, Y" }}
+                </span>
+            </div>
+            
+            <!-- Short Description -->
+            {% if single_post.short_describtion %}
+            <div class="lead mb-4 p-3 bg-light rounded">
+                {{ single_post.short_describtion }}
+            </div>
+            {% endif %}
+            
+            <!-- Blog Body Content -->
+            <div class="blog-content mb-5">
+                {{ single_post.blog_body|safe }}
+            </div>
+            
+           <!-- Comments Section -->
+<div class="comments-section mt-5">
+    <h3 class="mb-4">Comments ({{comments.count}})</h3>
+    
+    <!-- قائمة التعليقات -->
+    <div class="comment-list">
+        <!-- مثال لتعليق واحد -->
+        {% for  comment in  comments %}
+        <div class="comment mb-4 p-3 border rounded">
+            <div class="comment-meta mb-2">
+                <strong class="mr-2">{{comment.user}} </strong>
+                <span class="text-muted">
+                    <i class="far fa-calendar mr-1"></i> {{comment.created_at}}
+                </span>
+            </div>
+            <div class="comment-body">
+              {{comment.comment}}
+            </div>
+        </div>
+        {% endfor %}
+        <!-- كرر البلوك أعلاه لكل تعليق -->
+
+    </div>
+ {%if  user.is_authenticated%}
+    <!-- نموذج إضافة تعليق جديد -->
+    <div class="add-comment mt-5">
+        <h4 class="mb-3">Write a comment </h4>
+        <form method="post">
+            {% csrf_token %}
+           
+          
+            <div class="form-group">
+                <label for="comment" class="my-1">Comment</label>
+                <textarea class="form-control my-3" id="comment" name="comment" rows="4" placeholder=" write your Comment"></textarea>
+            </div>
+           
+            <button type="submit" class="btn btn-warning my-3">Send</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="alert alert-light text-center rounded shadow-sm p-3">
+  <h5 class="mb-0 fw-bold">
+    Please 
+    <a href="{% url 'login' %}" class="text-warning text-decoration-none">
+      login
+    </a> 
+    to write a comment
+  </h5>
+</div>
+    {% endif %}
+</div>
+            
+            <!-- Navigation -->
+            <div class="post-navigation d-flex justify-content-between border-top pt-4">
+                <a href="{% url 'home' %}" class="btn btn-warning my-3">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Blog
+                </a>
+                <div class="social-share">
+                    <span class="mr-2">Share:</span>
+                    <a href="#" class="text-dark mx-1"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-dark mx-1"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-dark mx-1"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+{%load crispy_forms_tags%}
+
+<div class="container-fluid  " style="max-width: 1200px;margin: auto;">
+  <div class="row">
+    <!-- Sidebar -->
+    {%include 'dashboard/sidebar.html'%}
+
+    <!-- Main Content (Table) -->
+    <div class="col-12 col-md-9" >
+      <div class="card shadow-lg border-0 rounded-3">
+        <div class="card-header bg-dark text-white d-flex justify-content-center align-items-center">
+          <h5 class="mb-0">Add New  Post</h5>
+          
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+           <form action="{% url 'add_post' %}" method="POST" enctype="multipart/form-data" >
+        {% csrf_token %}
+        
+        <div class="mb-3">
+          {{ form|crispy }}
+        </div>
+        
+        <button type="submit" class="btn btn-warning fw-bold">
+          <i class="fas fa-plus me-1 center"></i> Add
+        </button>
+
+      </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+  </div>
+</div>
+{% endblock %}
