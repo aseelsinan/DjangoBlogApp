@@ -1,11 +1,11 @@
    <div class="col-12 col-md-3 mb-3">
       <div class="list-group shadow-sm">
-        <a href="{%url 'Dashboard' %}"class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'Dashboard' %}active bg-warning text-dark fw-bold{% endif %}"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
+        <a href="{%url 'dashboard' %}"class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'dashboard' %}active bg-warning text-dark fw-bold{% endif %}"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
         {%if perms.auth.view_user%}
         <a href="{%url 'users' %}"class="list-group-item list-group-item-action {% if request.resolver_match.url_name == 'users' %}active bg-warning text-dark fw-bold{% endif %}"><i class="fas fa-tachometer-alt me-2"></i> Users</a>
         {%endif%}
-     <a href="{% url 'Dashboard_categories' %}"  
-   class="list-group-item list-group-item-action {% if   request.resolver_match.url_name == 'Dashboard_categories' %}active bg-warning text-dark fw-bold{% endif %}">
+     <a href="{% url 'dashboard_categories' %}"  
+   class="list-group-item list-group-item-action {% if   request.resolver_match.url_name == 'dashboard_categories' %}active bg-warning text-dark fw-bold{% endif %}">
    <i class="fas fa-folder me-2"></i> Categories
 </a>
          
