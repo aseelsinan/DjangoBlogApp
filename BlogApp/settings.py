@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-7e=it-f-j+^)7!==p4ejau%0l3x-oj%^%ul48jy4lynnv(*^&u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     'Blogs',
     'BlogApp',
     'Dashboards',
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -135,6 +137,6 @@ STATICFILES_DIRS = [
 
 
 MEDIA_URL='/media/'
-MEDIA_ROOT=BASE_DIR/'/media'
+MEDIA_ROOT=BASE_DIR/'media'
 
 CRISPY_TEMPLATE_PACK = 'Bootstrap5'
