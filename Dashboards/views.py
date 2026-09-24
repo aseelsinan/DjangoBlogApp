@@ -111,7 +111,7 @@ def delete_post(request , pk):
 def users(request):
     users = User.objects.all()
     context={'users':users}
-    return render(request,'dashboard/users.html',context)
+    return render(request,'Dashboard/users.html',context)
 
 
 def add_users(request):
@@ -124,7 +124,7 @@ def add_users(request):
    
     form = UsersForm()
     context={'form':form}
-    return render (request,"dashboard/add_users.html",context)
+    return render (request,"Dashboard/add_users.html",context)
 
 
 def edit_user(request,pk):
@@ -136,7 +136,7 @@ def edit_user(request,pk):
             return redirect('users')
     form =UsersForm(instance=user)
     context={'form':form,'user':user}
-    return render (request,"dashboard/edit_user.html",context)
+    return render (request,"Dashboard/edit_user.html",context)
 
 
 
